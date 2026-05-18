@@ -560,3 +560,23 @@ footer a {
         padding: 2rem;
     }
 }
+
+/* ============================================ */
+/*  15. BOUTON AFFICHER/MASQUER MOT DE PASSE    */
+/* ============================================ */
+
+.btn-toggle-password {
+    background-color: var(--couleur-fond);
+    color: var(--couleur-principale);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--rayon);
+    padding: 0.4rem 0.8rem;
+    margin-top: 0.3rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    align-self: flex-start; /* le bouton ne prend pas toute la largeur */
+}
+
+.btn-toggle-password:hover {
+    background-color: var(--couleur-bordure);
+}
