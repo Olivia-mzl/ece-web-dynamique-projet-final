@@ -75,7 +75,7 @@ include "includes/menu.php";
         </article>
 
         <article class="event-card" data-categorie="soiree" data-association="bde" data-date="2026-10-31">
-            <img src="assets/images/soiree-Halloween.png" alt="Affiche soirée Halloween">
+            <img src="assets/images/soiree-Halloween.webp" alt="Affiche soirée Halloween">
             <h3>Soirée Halloween</h3>
             <p class="event-date">31 octobre 2026 - 21h00</p>
             <p class="event-place">Le Sucre</p>
