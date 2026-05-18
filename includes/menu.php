@@ -5,16 +5,17 @@
 
 /*
    Ce fichier est inclus JUSTE APRÈS header.php.
-   Il contient l'en-tête visible avec logo et menu de navigation.
+   Il contient l'en-tête visible avec logo et menu de navigation,
+   ainsi que les messages flash éventuels.
 
    Plus tard, on y ajoutera :
-   - la logique "lien actif" en PHP (page courante mise en évidence)
+   - la logique "lien actif" en PHP
    - l'affichage conditionnel selon le rôle de l'utilisateur
-     (un participant ne voit pas le lien "Administration")
    - le message "Bonjour Prénom Nom" si connecté
-
-   Pour l'instant, on a juste le menu statique, identique pour tous.
 */
+
+// On charge les fonctions utilitaires (qui démarrent aussi la session)
+require_once __DIR__ . "/functions.php";
 ?>
 <header>
     <div class="logo">
@@ -32,3 +33,8 @@
         </ul>
     </nav>
 </header>
+
+<?php
+// Affiche les messages flash éventuels (succès / erreur)
+afficher_messages();
+?>

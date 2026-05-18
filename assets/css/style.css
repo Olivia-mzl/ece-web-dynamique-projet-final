@@ -580,3 +580,27 @@ footer a {
 .btn-toggle-password:hover {
     background-color: var(--couleur-bordure);
 }
+
+/* ============================================ */
+/*  17. MESSAGES FLASH (succès / erreur)        */
+/* ============================================ */
+
+.message {
+    padding: 0.9rem 1.2rem;
+    margin: 1rem;
+    border-radius: var(--rayon);
+    font-weight: 500;
+    border-left: 4px solid;
+}
+
+.message-succes {
+    background-color: #e6f4ea;
+    color: #1e4d2b;
+    border-left-color: #1e7c3a;
+}
+
+.message-erreur {
+    background-color: #fdecea;
+    color: #7a1f1a;
+    border-left-color: #c0392b;
+}
