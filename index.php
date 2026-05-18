@@ -32,7 +32,7 @@ include "includes/menu.php";
 
             <!-- Carte événement 1 -->
             <article class="event-card">
-                <img src="assets/images/placeholder.jpg" alt="Affiche soirée BDE">
+                <img src="assets/images/soiree-bde.jpg" alt="Affiche soirée BDE">
                 <h3>Soirée d'intégration BDE</h3>
                 <p class="event-date">25 septembre 2026 - 20h00</p>
                 <p class="event-place">Campus Lyon - Salle des fêtes</p>
@@ -42,7 +42,7 @@ include "includes/menu.php";
 
             <!-- Carte événement 2 -->
             <article class="event-card">
-                <img src="assets/images/placeholder.jpg" alt="Affiche tournoi sport">
+                <img src="assets/images/tournois-sport.png" alt="Affiche tournoi sport">
                 <h3>Tournoi de futsal BDS</h3>
                 <p class="event-date">2 octobre 2026 - 14h00</p>
                 <p class="event-place">Gymnase central</p>
@@ -52,7 +52,7 @@ include "includes/menu.php";
 
             <!-- Carte événement 3 -->
             <article class="event-card">
-                <img src="assets/images/placeholder.jpg" alt="Affiche conférence">
+                <img src="assets/images/conference-IA.jpg" alt="Affiche conférence">
                 <h3>Conférence IA et Éthique</h3>
                 <p class="event-date">15 octobre 2026 - 18h30</p>
                 <p class="event-place">Amphi A1</p>

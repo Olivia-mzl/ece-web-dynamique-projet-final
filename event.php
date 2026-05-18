@@ -12,7 +12,7 @@ include "includes/menu.php";
     <!-- ===== DÉTAIL ÉVÉNEMENT ===== -->
     <article class="event-detail">
 
-        <img src="assets/images/placeholder.jpg" alt="Affiche soirée d'intégration BDE">
+        <img src="assets/images/soiree-bde.jpg" alt="Affiche soirée d'intégration BDE">
 
         <h1>Soirée d'intégration BDE</h1>
 
