@@ -3,18 +3,57 @@
 /*  OMNESEVENT - PAGE D'ACCUEIL                 */
 /* ============================================ */
 
-// On définit le titre spécifique à cette page,
-// AVANT d'inclure header.php (qui s'en sert).
+require_once "config/bdd.php";
+require_once "includes/functions.php";
+
+
+/* ============================================ */
+/*  RÉCUPÉRATION DES PROCHAINS ÉVÉNEMENTS       */
+/* ============================================ */
+
+/*
+   On récupère les 3 prochains événements publiés.
+   - WHERE date_evenement >= CURDATE() : à venir uniquement
+   - AND statut = 'publie' : pas les annulés / en attente / refusés
+   - ORDER BY date_evenement ASC : du plus proche au plus lointain
+   - LIMIT 3 : les 3 premiers seulement
+
+   On fait des JOIN pour récupérer le nom de la catégorie et de l'association.
+*/
+
+$sql = "
+    SELECT
+        e.id,
+        e.titre,
+        e.description,
+        e.date_evenement,
+        e.heure_evenement,
+        e.lieu,
+        e.image,
+        c.nom AS categorie_nom,
+        a.nom AS association_nom
+    FROM events e
+    LEFT JOIN categories c   ON e.id_categorie  = c.id
+    LEFT JOIN associations a ON e.id_association = a.id
+    WHERE e.date_evenement >= CURDATE()
+      AND e.statut = 'publie'
+    ORDER BY e.date_evenement ASC
+    LIMIT 3
+";
+
+$requete = $bdd->query($sql);
+$evenements = $requete->fetchAll();
+
+
+/* ============================================ */
+/*  AFFICHAGE DE LA PAGE                        */
+/* ============================================ */
+
 $titre_page = "OmnesEvent - Accueil";
-
-// On inclut l'en-tête commun (doctype, head, ouverture body)
 include "includes/header.php";
-
-// On inclut le menu de navigation
 include "includes/menu.php";
 ?>
 
-<!-- ===== CONTENU PRINCIPAL ===== -->
 <main>
 
     <!-- Bannière d'accueil -->
@@ -26,50 +65,71 @@ include "includes/menu.php";
 
     <!-- Section événements à venir -->
     <section class="events-preview">
-        <h2>Événements à venir</h2>
+        <h2>Prochains événements</h2>
 
-        <div class="events-grid">
+        <?php if (empty($evenements)): ?>
 
-            <!-- Carte événement 1 -->
-            <article class="event-card">
-                <img src="assets/images/soiree-bde.jpg" alt="Affiche soirée BDE">
-                <h3>Soirée d'intégration BDE</h3>
-                <p class="event-date">25 septembre 2026 - 20h00</p>
-                <p class="event-place">Campus Lyon - Salle des fêtes</p>
-                <p class="event-category">Catégorie : Soirée</p>
-                <a href="event.php" class="btn-secondary">Voir détails</a>
-            </article>
+            <!-- Aucun événement à venir -->
+            <p>Aucun événement à venir pour le moment.</p>
 
-            <!-- Carte événement 2 -->
-            <article class="event-card">
-                <img src="assets/images/tournois-sport.png" alt="Affiche tournoi sport">
-                <h3>Tournoi de futsal BDS</h3>
-                <p class="event-date">2 octobre 2026 - 14h00</p>
-                <p class="event-place">Gymnase central</p>
-                <p class="event-category">Catégorie : Sport</p>
-                <a href="event.php" class="btn-secondary">Voir détails</a>
-            </article>
+        <?php else: ?>
 
-            <!-- Carte événement 3 -->
-            <article class="event-card">
-                <img src="assets/images/conference-IA.jpg" alt="Affiche conférence">
-                <h3>Conférence IA et Éthique</h3>
-                <p class="event-date">15 octobre 2026 - 18h30</p>
-                <p class="event-place">Amphi A1</p>
-                <p class="event-category">Catégorie : Culture</p>
-                <a href="event.php" class="btn-secondary">Voir détails</a>
-            </article>
+            <div class="events-grid">
 
-        </div>
+                <?php foreach ($evenements as $event): ?>
 
-        <p style="text-align: center; margin-top: 20px;">
-            <a href="events.php">Voir tous les événements →</a>
-        </p>
+                    <article class="event-card">
+
+                        <!-- Image (ou placeholder si pas d'image) -->
+                        <?php if (!empty($event['image'])): ?>
+                            <img src="assets/uploads/<?php echo htmlspecialchars($event['image']); ?>"
+                                 alt="Affiche <?php echo htmlspecialchars($event['titre']); ?>">
+                        <?php else: ?>
+                            <img src="assets/images/placeholder.jpg"
+                                 alt="Affiche par défaut">
+                        <?php endif; ?>
+
+                        <h3><?php echo htmlspecialchars($event['titre']); ?></h3>
+
+                        <p class="event-date">
+                            <?php
+                            // Formatage de la date en français
+                            $date = new DateTime($event['date_evenement']);
+                            echo $date->format('d/m/Y');
+                            ?>
+                            -
+                            <?php
+                            // Formatage de l'heure (HH:MM)
+                            echo substr($event['heure_evenement'], 0, 5);
+                            ?>
+                        </p>
+
+                        <p class="event-place">
+                            <?php echo htmlspecialchars($event['lieu']); ?>
+                        </p>
+
+                        <p class="event-category">
+                            Catégorie : <?php echo htmlspecialchars($event['categorie_nom'] ?? 'Non classée'); ?>
+                        </p>
+
+                        <a href="event.php?id=<?php echo $event['id']; ?>" class="btn-secondary">
+                            Voir détails
+                        </a>
+
+                    </article>
+
+                <?php endforeach; ?>
+
+            </div>
+
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="events.php">Voir tous les événements →</a>
+            </p>
+
+        <?php endif; ?>
+
     </section>
 
 </main>
 
-<?php
-// On inclut le pied de page commun (footer, scripts JS, fermeture body/html)
-include "includes/footer.php";
-?>
+<?php include "includes/footer.php"; ?>

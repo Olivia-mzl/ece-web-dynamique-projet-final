@@ -18,7 +18,7 @@ include "includes/menu.php";
     <!-- ===== CRÉER UN ÉVÉNEMENT ===== -->
     <section>
         <h2>Créer un nouvel événement</h2>
-        <a href="#" class="btn-primary">+ Nouvel événement</a>
+        <a href="create-event.php" class="btn-primary">+ Nouvel événement</a>
     </section>
 
     <!-- ===== MES ÉVÉNEMENTS ===== -->

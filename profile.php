@@ -2,12 +2,8 @@
 require_once "config/bdd.php";
 require_once "includes/functions.php";
 
-// PROTECTION : seuls les utilisateurs connectés peuvent voir cette page
 exiger_connexion();
 
-$titre_page = "OmnesEvent - Mon profil";
-include "includes/header.php";
-include "includes/menu.php";
 $titre_page = "OmnesEvent - Mon profil";
 include "includes/header.php";
 include "includes/menu.php";

@@ -30,68 +30,15 @@ $(document).ready(function () {
 
 
     /* ============================================ */
-    /*  2. FILTRES ÉVÉNEMENTS (page events.html)    */
+    /*    2. FILTRES ÉVÉNEMENTS (désactivé)         */
     /* ============================================ */
 
     /*
-       Filtrage côté client : quand l'utilisateur change un filtre,
-       on cache ou affiche les cartes d'événements correspondantes.
-
-       Pour que ça marche, on a besoin que chaque carte ait des
-       attributs "data-categorie" et "data-association".
-       On les ajoutera dans events.html juste après.
+       Les filtres étaient gérés côté client.
+       Ensuite, le filtrage est fait côté serveur en PHP
+       (méthode plus robuste). On laisse donc le formulaire envoyer
+       sa requête naturellement à events.php via GET.
     */
-
-    // On déclenche le filtre dès qu'un champ change
-    $("#filtre-categorie, #filtre-association, #filtre-date").on("change", function () {
-        filtrerEvenements();
-    });
-
-    // On intercepte aussi la soumission du formulaire pour empêcher le rechargement
-    $(".filters form").on("submit", function (event) {
-        event.preventDefault(); // pas de rechargement de la page
-        filtrerEvenements();
-    });
-
-    function filtrerEvenements() {
-        // On récupère les valeurs sélectionnées
-        var categorieChoisie = $("#filtre-categorie").val();
-        var associationChoisie = $("#filtre-association").val();
-        var dateChoisie = $("#filtre-date").val();
-
-        // On parcourt chaque carte d'événement
-        $(".events-grid .event-card").each(function () {
-            var carte = $(this);
-            var categorieCarte = carte.attr("data-categorie");
-            var associationCarte = carte.attr("data-association");
-            var dateCarte = carte.attr("data-date");
-
-            // On considère que la carte est visible par défaut
-            var visible = true;
-
-            // Filtre catégorie : si une catégorie est choisie et ne correspond pas, on cache
-            if (categorieChoisie !== "" && categorieChoisie !== categorieCarte) {
-                visible = false;
-            }
-
-            // Filtre association
-            if (associationChoisie !== "" && associationChoisie !== associationCarte) {
-                visible = false;
-            }
-
-            // Filtre date : on n'affiche que les événements à partir de la date choisie
-            if (dateChoisie !== "" && dateCarte < dateChoisie) {
-                visible = false;
-            }
-
-            // Affichage ou masquage
-            if (visible) {
-                carte.show();
-            } else {
-                carte.hide();
-            }
-        });
-    }
 
 
     /* ============================================ */

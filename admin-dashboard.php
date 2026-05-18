@@ -1,4 +1,10 @@
 <?php
+require_once "config/bdd.php";
+require_once "includes/functions.php";
+
+// PROTECTION : seuls les admins peuvent voir cette page
+exiger_role('admin');
+
 $titre_page = "OmnesEvent - Espace administrateur";
 include "includes/header.php";
 include "includes/menu.php";
