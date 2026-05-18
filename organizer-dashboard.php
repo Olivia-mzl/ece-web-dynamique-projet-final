@@ -1,0 +1,90 @@
+<?php
+$titre_page = "OmnesEvent - Tableau de bord organisateur";
+include "includes/header.php";
+include "includes/menu.php";
+?>
+
+<main>
+
+    <h1>Tableau de bord organisateur</h1>
+    <p>Bonjour <strong>Marie Lefèvre</strong>, représentante du BDE.</p>
+
+    <!-- ===== CRÉER UN ÉVÉNEMENT ===== -->
+    <section>
+        <h2>Créer un nouvel événement</h2>
+        <a href="#" class="btn-primary">+ Nouvel événement</a>
+    </section>
+
+    <!-- ===== MES ÉVÉNEMENTS ===== -->
+    <section>
+        <h2>Mes événements</h2>
+
+        <article class="event-card">
+            <h3>Soirée d'intégration BDE</h3>
+            <p class="event-date">25 septembre 2026 - 20h00</p>
+            <p class="event-status">Statut : Publié</p>
+            <p>Inscrits : 45 / 100</p>
+            <a href="#" class="btn-secondary">Modifier</a>
+            <a href="#" class="btn-secondary">Voir les inscrits</a>
+            <a href="#" class="btn-danger">Annuler</a>
+        </article>
+
+        <article class="event-card">
+            <h3>Soirée Halloween</h3>
+            <p class="event-date">31 octobre 2026 - 21h00</p>
+            <p class="event-status">Statut : Publié</p>
+            <p>Inscrits : 78 / 150</p>
+            <a href="#" class="btn-secondary">Modifier</a>
+            <a href="#" class="btn-secondary">Voir les inscrits</a>
+            <a href="#" class="btn-danger">Annuler</a>
+        </article>
+
+        <article class="event-card">
+            <h3>Gala de fin d'année</h3>
+            <p class="event-date">15 juin 2027 - 19h00</p>
+            <p class="event-status">Statut : En attente de validation</p>
+            <p>Inscrits : 0 / 200</p>
+            <a href="#" class="btn-secondary">Modifier</a>
+            <a href="#" class="btn-danger">Supprimer</a>
+        </article>
+
+    </section>
+
+    <!-- ===== LISTE DES INSCRITS (exemple) ===== -->
+    <section>
+        <h2>Inscrits - Soirée d'intégration BDE</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Présence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dupont</td>
+                    <td>Juju</td>
+                    <td>juju.dupont@edu.ece.fr</td>
+                    <td><a href="#" class="btn-secondary">Valider présence</a></td>
+                </tr>
+                <tr>
+                    <td>Martin</td>
+                    <td>Léa</td>
+                    <td>lea.martin@edu.ece.fr</td>
+                    <td><a href="#" class="btn-secondary">Valider présence</a></td>
+                </tr>
+                <tr>
+                    <td>Bernard</td>
+                    <td>Tom</td>
+                    <td>tom.bernard@edu.ece.fr</td>
+                    <td>✓ Présent</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+<?php include "includes/footer.php"; ?>
