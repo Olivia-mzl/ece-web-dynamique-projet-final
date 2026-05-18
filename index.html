@@ -1,11 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>OmnesEvent - Accueil</title>
 </head>
 <body>
-    Hello Olivia 
+
+    <!-- ===== EN-TÊTE COMMUN ===== -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><strong>OmnesEvent</strong></a>
+        </div>
+        <nav>
+            <button id="menu-burger" aria-label="Ouvrir le menu">☰</button>
+            <ul id="menu-principal">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="events.html">Événements</a></li>
+                <li><a href="profile.html">Mon profil</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Connexion</a></li>
+                <li><a href="register.html">Inscription</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== CONTENU PRINCIPAL ===== -->
+    <main>
+
+        <!-- Bannière d'accueil -->
+        <section class="hero">
+            <h1>Bienvenue sur OmnesEvent</h1>
+            <p>La plateforme centralisée des événements étudiants d'Omnes.</p>
+            <a href="events.html" class="btn-primary">Voir tous les événements</a>
+        </section>
+
+        <!-- Section événements à venir -->
+        <section class="events-preview">
+            <h2>Événements à venir</h2>
+
+            <div class="events-grid">
+
+                <!-- Carte événement 1 -->
+                <article class="event-card">
+                    <img src="assets/images/placeholder.jpg" alt="Affiche soirée BDE">
+                    <h3>Soirée d'intégration BDE</h3>
+                    <p class="event-date">25 septembre 2026 - 20h00</p>
+                    <p class="event-place">Campus Lyon - Salle des fêtes</p>
+                    <p class="event-category">Catégorie : Soirée</p>
+                    <a href="event.html" class="btn-secondary">Voir détails</a>
+                </article>
+
+                <!-- Carte événement 2 -->
+                <article class="event-card">
+                    <img src="assets/images/placeholder.jpg" alt="Affiche tournoi sport">
+                    <h3>Tournoi de futsal BDS</h3>
+                    <p class="event-date">2 octobre 2026 - 14h00</p>
+                    <p class="event-place">Gymnase central</p>
+                    <p class="event-category">Catégorie : Sport</p>
+                    <a href="event.html" class="btn-secondary">Voir détails</a>
+                </article>
+
+                <!-- Carte événement 3 -->
+                <article class="event-card">
+                    <img src="assets/images/placeholder.jpg" alt="Affiche conférence">
+                    <h3>Conférence IA et Éthique</h3>
+                    <p class="event-date">15 octobre 2026 - 18h30</p>
+                    <p class="event-place">Amphi A1</p>
+                    <p class="event-category">Catégorie : Culture</p>
+                    <a href="event.html" class="btn-secondary">Voir détails</a>
+                </article>
+
+            </div>
+
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="events.html">Voir tous les événements →</a>
+            </p>
+        </section>
+
+    </main>
+
+    <!-- ===== PIED DE PAGE COMMUN ===== -->
+    <footer>
+        <p>&copy; 2026 OmnesEvent - Projet ING2</p>
+        <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Mentions légales</a></li>
+        </ul>
+    </footer>
+
 </body>
 </html>
