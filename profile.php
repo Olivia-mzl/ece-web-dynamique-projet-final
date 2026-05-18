@@ -1,4 +1,13 @@
 <?php
+require_once "config/bdd.php";
+require_once "includes/functions.php";
+
+// PROTECTION : seuls les utilisateurs connectés peuvent voir cette page
+exiger_connexion();
+
+$titre_page = "OmnesEvent - Mon profil";
+include "includes/header.php";
+include "includes/menu.php";
 $titre_page = "OmnesEvent - Mon profil";
 include "includes/header.php";
 include "includes/menu.php";
@@ -63,7 +72,7 @@ include "includes/menu.php";
     </section>
 
     <!-- ===== DÉCONNEXION ===== -->
-    <p><a href="login.php" class="btn-danger">Se déconnecter</a></p>
+    <p><a href="logout.php" class="btn-danger">Se déconnecter</a></p>
 
 </main>
 

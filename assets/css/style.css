@@ -604,3 +604,20 @@ footer a {
     color: #7a1f1a;
     border-left-color: #c0392b;
 }
+
+/* ============================================ */
+/*  18. BANDEAU DE BIENVENUE                    */
+/* ============================================ */
+
+.bandeau-bienvenue {
+    background-color: var(--couleur-fond);
+    border-bottom: 1px solid var(--couleur-bordure);
+    color: var(--couleur-texte-doux);
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.bandeau-bienvenue strong {
+    color: var(--couleur-principale);
+}

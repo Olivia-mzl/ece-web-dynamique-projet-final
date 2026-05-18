@@ -1,4 +1,10 @@
 <?php
+require_once "config/bdd.php";
+require_once "includes/functions.php";
+
+// PROTECTION : seuls les organisateurs peuvent voir cette page
+exiger_role('organisateur');
+
 $titre_page = "OmnesEvent - Tableau de bord organisateur";
 include "includes/header.php";
 include "includes/menu.php";
