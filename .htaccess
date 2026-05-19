@@ -1,0 +1,16 @@
+# ============================================
+#  OMNESEVENT - CONFIGURATION APACHE
+# ============================================
+
+# Indique à Apache que la page d'accueil est index.php
+DirectoryIndex index.php
+
+# Page personnalisée en cas d'erreur 404 (URL inexistante)
+ErrorDocument 404 /ece-web-dynamique-projet-final/404.php
+
+# Masque le numéro de version d'Apache dans les en-têtes HTTP
+# (pour ne pas donner d'info à un attaquant potentiel)
+ServerSignature Off
+
+# Désactive la liste des fichiers d'un dossier (si pas d'index.php)
+Options -Indexes

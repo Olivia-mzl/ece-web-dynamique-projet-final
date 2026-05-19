@@ -621,3 +621,31 @@ footer a {
 .bandeau-bienvenue strong {
     color: var(--couleur-principale);
 }
+
+/* ============================================ */
+/*  19. CARTES STATISTIQUES (DASHBOARDS)        */
+/* ============================================ */
+
+.stat-card {
+    background-color: var(--couleur-blanc);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre-carte);
+    padding: 1rem 1.5rem;
+    min-width: 150px;
+    flex: 1;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--couleur-principale);
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--couleur-texte-doux);
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}

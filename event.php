@@ -209,11 +209,39 @@ include "includes/menu.php";
                 </p>
 
             <?php elseif (a_le_role('participant')): ?>
-                <p>
-                    <a href="reserve.php?id=<?php echo $event['id']; ?>" class="btn-primary">
-                        Réserver ma place
-                    </a>
-                </p>
+
+                <?php
+                // Vérifier si l'utilisateur a déjà une réservation active pour cet événement
+                $sql_ma_resa = "SELECT id, statut FROM reservations
+                                WHERE id_user = ? AND id_event = ?
+                                  AND statut IN ('reserve', 'present')";
+                $req_ma_resa = $bdd->prepare($sql_ma_resa);
+                $req_ma_resa->execute([$_SESSION['id_user'], $event['id']]);
+                $ma_reservation = $req_ma_resa->fetch();
+                ?>
+
+                <?php if ($ma_reservation): ?>
+                    <!-- L'utilisateur a déjà réservé -->
+                    <p>
+                        <strong>✓ Tu as réservé une place pour cet événement.</strong>
+                    </p>
+                    <?php if ($ma_reservation['statut'] === 'reserve'): ?>
+                        <p>
+                            <a href="cancel-reservation.php?id=<?php echo $ma_reservation['id']; ?>" class="btn-danger">
+                                Annuler ma réservation
+                            </a>
+                        </p>
+                    <?php else: ?>
+                        <p><em>Tu as été marqué présent à cet événement.</em></p>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <!-- L'utilisateur n'a pas encore réservé -->
+                    <p>
+                        <a href="reserve.php?id=<?php echo $event['id']; ?>" class="btn-primary">
+                            Réserver ma place
+                        </a>
+                    </p>
+                <?php endif; ?>
 
             <?php else: ?>
                 <p><em>Seuls les participants peuvent réserver une place.</em></p>
@@ -223,6 +251,34 @@ include "includes/menu.php";
             <p><strong>Cet événement est complet, plus de place disponible.</strong></p>
         <?php endif; ?>
 
+        <!-- ===== BOUTONS DE GESTION (propriétaire ou admin) ===== -->
+        <?php
+        $est_proprietaire = (est_connecte()
+                          && (int) $event['id_organisateur'] === (int) $_SESSION['id_user']);
+        $est_admin = a_le_role('admin');
+
+        if ($est_proprietaire || $est_admin):
+        ?>
+
+            <hr style="margin: 1.5rem 0;">
+
+            <p style="color: var(--couleur-texte-doux); font-size: 0.9rem;">
+                <strong>Outils de gestion :</strong>
+            </p>
+
+            <p>
+                <?php if (!$event_passe && $est_proprietaire): ?>
+                    <a href="edit-event.php?id=<?php echo $event['id']; ?>" class="btn-secondary">
+                        Modifier
+                    </a>
+                <?php endif; ?>
+
+                <a href="delete-event.php?id=<?php echo $event['id']; ?>" class="btn-danger">
+                    Supprimer
+                </a>
+            </p>
+
+        <?php endif; ?>
     </article>
 
 </main>
