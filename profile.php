@@ -178,6 +178,25 @@ include "includes/menu.php";
                         <?php endif; ?>
                     </p>
 
+                    <div class="qr-section" style="display: flex; align-items: center; gap: 1rem; margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: var(--rayon);">
+    <div id="qr-<?php echo $billet['id_reservation']; ?>"></div>
+    <div>
+        <strong>🎟️ Ton billet</strong>
+        <p style="margin: 0.3rem 0 0 0; color: #555; font-size: 0.9rem;">
+            Présente ce QR code à l'organisateur le jour J pour valider ta présence.
+        </p>
+    </div>
+</div>
+<script>
+    new QRCode(document.getElementById("qr-<?php echo $billet['id_reservation']; ?>"), {
+        text: "OMNESEVENT-RES-<?php echo $billet['id_reservation']; ?>-USER-<?php echo $_SESSION['id_user']; ?>-EVENT-<?php echo $billet['id_event']; ?>",
+        width: 120,
+        height: 120,
+        colorDark : "#0f5b6e",
+        colorLight : "#ffffff"
+    });
+</script>
+
                     <p>
                         <a href="event.php?id=<?php echo $billet['id_event']; ?>" class="btn-secondary">
                             Voir l'événement

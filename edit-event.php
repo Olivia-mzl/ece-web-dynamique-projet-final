@@ -94,6 +94,7 @@ $description_saisie = $event['description'];
 $date_saisie        = $event['date_evenement'];
 $heure_saisie       = substr($event['heure_evenement'], 0, 5); // format HH:MM
 $lieu_saisi         = $event['lieu'];
+$coordonnees_saisies = $event['coordonnees'] ?? '';
 $capacite_saisie    = $event['capacite_max'];
 $categorie_saisie   = (int) $event['id_categorie'];
 $association_saisie = (int) $event['id_association'];
@@ -114,6 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $date_event   = nettoyer($_POST['date_event']   ?? '');
     $heure        = nettoyer($_POST['heure']        ?? '');
     $lieu         = nettoyer($_POST['lieu']         ?? '');
+    $coordonnees  = nettoyer($_POST['coordonnees']  ?? '');
     $capacite     = (int) ($_POST['capacite']       ?? 0);
     $id_categorie = (int) ($_POST['id_categorie']   ?? 0);
     $id_assoc     = (int) ($_POST['id_association'] ?? 0);
@@ -124,6 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $date_saisie        = $date_event;
     $heure_saisie       = $heure;
     $lieu_saisi         = $lieu;
+    $coordonnees_saisies = $coordonnees;
     $capacite_saisie    = $capacite;
     $categorie_saisie   = $id_categorie;
     $association_saisie = $id_assoc;
@@ -226,6 +229,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     date_evenement = ?,
                     heure_evenement = ?,
                     lieu = ?,
+                    coordonnees = ?,
                     image = ?,
                     capacite_max = ?,
                     id_association = ?,
@@ -250,6 +254,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $date_event,
             $heure,
             $lieu,
+            $coordonnees,
             $nom_image_a_garder,
             $capacite,
             $id_assoc_final,
@@ -316,6 +321,11 @@ include "includes/menu.php";
             <label for="lieu">Lieu :</label>
             <input type="text" id="lieu" name="lieu" maxlength="150" required
                    value="<?php echo htmlspecialchars($lieu_saisi); ?>">
+
+            <label for="coordonnees">Coordonnées GPS (facultatif) :</label>
+            <input type="text" id="coordonnees" name="coordonnees" placeholder="Ex: 45.7640,4.8357"
+                   value="<?php echo htmlspecialchars($coordonnees_saisies); ?>">
+            <small style="display: block; color: #666; margin-bottom: 1rem;"> Format : latitude,longitude. Récupère-les sur Google Maps (clic droit sur le lieu → copier).</small>
 
             <label for="capacite">Capacité maximale :</label>
             <input type="number" id="capacite" name="capacite" min="1" max="10000" required

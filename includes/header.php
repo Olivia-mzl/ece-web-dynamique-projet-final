@@ -28,5 +28,12 @@ if (!isset($titre_page)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titre_page; ?></title>
     <link rel="stylesheet" href="assets/css/style.css">
+
+<!-- Leaflet (carte interactive) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- QRCode.js (génération de QR codes) -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>

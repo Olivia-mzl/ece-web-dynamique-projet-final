@@ -51,6 +51,7 @@ $sql = "
         e.date_evenement,
         e.heure_evenement,
         e.lieu,
+        e.coordonnees,
         e.image,
         e.capacite_max,
         e.statut,
@@ -165,6 +166,30 @@ include "includes/menu.php";
                 <strong>Lieu :</strong>
                 <?php echo htmlspecialchars($event['lieu']); ?>
             </li>
+            <?php if (!empty($event['coordonnees'])): ?>
+    <li>
+        <strong>Carte du lieu :</strong>
+        <div id="map" style="height: 300px; width: 100%; margin-top: 0.5rem; border-radius: var(--rayon);"></div>
+        <script>
+            (function() {
+                var coords = "<?php echo htmlspecialchars($event['coordonnees']); ?>".split(',');
+                var lat = parseFloat(coords[0]);
+                var lng = parseFloat(coords[1]);
+
+                var map = L.map('map').setView([lat, lng], 16);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 19
+                }).addTo(map);
+
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup("<?php echo htmlspecialchars(addslashes($event['titre'])); ?><br><?php echo htmlspecialchars(addslashes($event['lieu'])); ?>")
+                    .openPopup();
+            })();
+        </script>
+    </li>
+<?php endif; ?>
             <li>
                 <strong>Association :</strong>
                 <?php echo htmlspecialchars($event['association_nom'] ?? 'Indépendant'); ?>

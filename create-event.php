@@ -29,6 +29,7 @@ $associations = $bdd->query("SELECT id, nom FROM associations ORDER BY nom")->fe
 $erreurs = [];
 
 // Variables pour pré-remplir le formulaire en cas d'erreur
+$coordonnees_saisies = "";
 $titre_saisi          = "";
 $description_saisie   = "";
 $date_saisie          = "";
@@ -47,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $date_event   = nettoyer($_POST['date_event']   ?? '');
     $heure        = nettoyer($_POST['heure']        ?? '');
     $lieu         = nettoyer($_POST['lieu']         ?? '');
+    $coordonnees  = nettoyer($_POST['coordonnees']  ?? '');
     $capacite     = (int) ($_POST['capacite']       ?? 0);
     $id_categorie = (int) ($_POST['id_categorie']   ?? 0);
     $id_assoc     = (int) ($_POST['id_association'] ?? 0);
@@ -57,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $date_saisie        = $date_event;
     $heure_saisie       = $heure;
     $lieu_saisi         = $lieu;
+    $coordonnees_saisies = $coordonnees;
     $capacite_saisie    = $capacite;
     $categorie_saisie   = $id_categorie;
     $association_saisie = $id_assoc;
@@ -133,23 +136,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nom_image = null; // par défaut, pas d'image
 
     if (empty($erreurs)) {
-        $resultat_upload = uploader_image('image', 'assets/uploads');
+    $resultat_upload = uploader_image('image', 'assets/uploads');
 
-        if (!$resultat_upload['succes']) {
-            $erreurs[] = $resultat_upload['erreur'];
-        } else {
-            $nom_image = $resultat_upload['nom_fichier']; // peut être null si pas de fichier envoyé
-        }
+    if (!$resultat_upload['succes']) {
+        $erreurs[] = $resultat_upload['erreur'];
+    } else {
+        $nom_image = $resultat_upload['nom_fichier'];
     }
+    }
+
     if (empty($erreurs)) {
 
         // L'association peut être NULL (événement sans association)
         $id_assoc_final = ($id_assoc > 0) ? $id_assoc : null;
 
         $sql = "INSERT INTO events
-                (titre, description, date_evenement, heure_evenement, lieu, image,
+                (titre, description, date_evenement, heure_evenement, lieu, coordonnees, image,
                  capacite_max, statut, id_organisateur, id_association, id_categorie)
-                VALUES (?, ?, ?, ?, ?, ?, ?, 'publie', ?, ?, ?)";
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'publie', ?, ?, ?)";
 
         $requete = $bdd->prepare($sql);
         $requete->execute([
@@ -158,7 +162,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $date_event,
             $heure,
             $lieu,
-            $nom_image,            // <-- nouveau (peut être null)
+            $coordonnees,
+            $nom_image,
             $capacite,
             $_SESSION['id_user'],
             $id_assoc_final,
@@ -224,6 +229,11 @@ include "includes/menu.php";
             <label for="lieu">Lieu :</label>
             <input type="text" id="lieu" name="lieu" maxlength="150" required
                    value="<?php echo htmlspecialchars($lieu_saisi); ?>">
+
+            <label for="coordonnees">Coordonnées GPS (facultatif) :</label>
+            <input type="text" id="coordonnees" name="coordonnees" placeholder="Ex: 45.7640,4.8357"
+                   value="<?php echo htmlspecialchars($coordonnees_saisies); ?>">
+            <small style="display: block; color: #666; margin-bottom: 1rem;"> Format : latitude,longitude. Récupère-les sur Google Maps (clic droit sur le lieu → copier).</small>
 
             <label for="capacite">Capacité maximale :</label>
             <input type="number" id="capacite" name="capacite" min="1" max="10000" required
