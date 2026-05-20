@@ -237,3 +237,7 @@ Champs ajoutés en bonus :
 Projet réalisé par Olivia, Florence et Rayane.
 Cours "Web Dynamique".
 ECE Lyon — Promo ING2 — Groupe 1 — Année 2025-2026.
+
+
+## Accès au site via :
+omneseventg1dprojet.myartsonline.com
